@@ -1,0 +1,22 @@
+services:
+  pgui:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Server 1
+      - DB_1_NAME=production
+      - DB_1_HOST=host.docker.internal
+      - DB_1_PORT=5432
+      - DB_1_USER=readonly
+      - DB_1_PASSWORD=secret
+      - DB_1_SSL=false
+
+      # Server 2 (example)
+      # - DB_2_NAME=staging
+      # - DB_2_HOST=staging-db.internal
+      # - DB_2_PORT=5432
+      # - DB_2_USER=readonly
+      # - DB_2_PASSWORD=secret2
+      # - DB_2_SSL=true
+    restart: unless-stopped

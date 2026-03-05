@@ -1,0 +1,83 @@
+import { notFound } from "next/navigation"
+import { getServerConfig } from "@/lib/db/config"
+import { getDatabaseOverview } from "@/lib/db/queries"
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card"
+
+export default async function DatabasePage({
+  params,
+}: {
+  params: Promise<{ serverId: string; dbName: string }>
+}) {
+  const { serverId, dbName } = await params
+  const decodedDbName = decodeURIComponent(dbName)
+  const config = getServerConfig(serverId)
+
+  if (!config) {
+    notFound()
+  }
+
+  let overview
+  let error: string | null = null
+
+  try {
+    overview = await getDatabaseOverview(config, decodedDbName)
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Failed to load overview"
+  }
+
+  return (
+    <div className="p-6">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold tracking-tight">{decodedDbName}</h1>
+        <p className="text-muted-foreground text-sm">Database overview</p>
+      </div>
+
+      {error ? (
+        <Card>
+          <CardContent className="pt-6">
+            <p className="text-destructive text-sm">{error}</p>
+          </CardContent>
+        </Card>
+      ) : overview ? (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Version</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">{overview.version.split(",")[0]}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Database Size</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold">{overview.database_size}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Schemas</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-1.5">
+                {overview.schemas.map((s) => (
+                  <Badge key={s.schema_name} variant="secondary">
+                    {s.schema_name}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      ) : null}
+    </div>
+  )
+}
