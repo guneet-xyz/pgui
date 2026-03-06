@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { getServerConfig } from "@/lib/db/config"
 import { getDatabaseOverview } from "@/lib/db/queries"
+import { CopyConnectionUrl } from "@/components/copy-connection-url"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
@@ -33,9 +34,19 @@ export default async function DatabasePage({
 
   return (
     <div className="p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">{decodedDbName}</h1>
-        <p className="text-muted-foreground text-sm">Database overview</p>
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">{decodedDbName}</h1>
+          <p className="text-muted-foreground text-sm">Database overview</p>
+        </div>
+        <CopyConnectionUrl
+          host={config.host}
+          port={config.port}
+          user={config.user}
+          password={config.password}
+          ssl={config.ssl}
+          dbName={decodedDbName}
+        />
       </div>
 
       {error ? (
