@@ -1,4 +1,4 @@
-name: Docker Push
+name: Release & Docker Push
 
 on:
   push:
@@ -19,9 +19,35 @@ jobs:
       - run: npm ci
       - run: npm run format:check
 
+  release:
+    name: Semantic Release
+    needs: format-check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      new-release: ${{ steps.semantic.outputs.new_release_published }}
+      version: ${{ steps.semantic.outputs.new_release_version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   docker-push:
     name: Docker Push
-    needs: format-check
+    needs: release
+    if: needs.release.outputs.new-release == 'true'
     runs-on: ubuntu-latest
     environment: deployment
     steps:
@@ -35,6 +61,10 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKER_IMAGE }}:latest
+          build-args: |
+            BUILD_VERSION=${{ needs.release.outputs.version }}
+          tags: |
+            ${{ vars.DOCKER_IMAGE }}:latest
+            ${{ vars.DOCKER_IMAGE }}:${{ needs.release.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

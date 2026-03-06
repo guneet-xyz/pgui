@@ -23,12 +23,7 @@ export function getPool(config: ServerConfig, databaseName?: string): pg.Pool {
     max: 5,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 5000,
-  })
-
-  pool.on("connect", (client) => {
-    client.query("SET default_transaction_read_only = true").catch((err) => {
-      console.error("Failed to set read-only mode:", err)
-    })
+    options: "-c default_transaction_read_only=on",
   })
 
   pool.on("error", (err) => {
