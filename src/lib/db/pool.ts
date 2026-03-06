@@ -1,4 +1,5 @@
 import pg from "pg"
+
 import type { ServerConfig } from "@/types/database"
 
 const DEFAULT_DATABASE = "postgres"

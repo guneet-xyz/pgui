@@ -1,6 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+
 import { getServerConfig } from "@/lib/db/config"
 import { createDatabase } from "@/lib/db/queries"
 

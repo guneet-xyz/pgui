@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Eye, Table2 } from "lucide-react"
+
 import { getServerConfig } from "@/lib/db/config"
 import { getTables } from "@/lib/db/queries"
 import { Badge } from "@/components/ui/badge"

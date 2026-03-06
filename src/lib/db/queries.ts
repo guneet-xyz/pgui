@@ -1,4 +1,5 @@
 import pg from "pg"
+
 import type {
   ColumnInfo,
   ConstraintInfo,
@@ -6,10 +7,10 @@ import type {
   DatabaseOverview,
   IndexInfo,
   SchemaInfo,
+  ServerConfig,
   TableDataResult,
   TableInfo,
 } from "@/types/database"
-import type { ServerConfig } from "@/types/database"
 import { getPool } from "./pool"
 
 export async function getServerVersion(config: ServerConfig): Promise<string> {

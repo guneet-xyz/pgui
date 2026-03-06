@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+
 import { getServerConfigs } from "@/lib/db/config"
 import { testConnection } from "@/lib/db/pool"
 import { Header } from "@/components/header"

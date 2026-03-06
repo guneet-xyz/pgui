@@ -1,4 +1,5 @@
 import { connection } from "next/server"
+
 import type { ServerConfig } from "@/types/database"
 
 export async function getServerConfigs(): Promise<ServerConfig[]> {

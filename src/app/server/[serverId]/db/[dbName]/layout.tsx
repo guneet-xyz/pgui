@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { Database } from "lucide-react"
+
 import { getServerConfig } from "@/lib/db/config"
 import { getSchemas } from "@/lib/db/queries"
 import { Header } from "@/components/header"

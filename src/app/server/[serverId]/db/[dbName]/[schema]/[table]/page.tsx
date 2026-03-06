@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Eye, Key, Link2, Table2 } from "lucide-react"
+
 import { getServerConfig } from "@/lib/db/config"
 import {
   getColumns,

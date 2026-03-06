@@ -1,4 +1,5 @@
 import type { NextConfig } from "next"
+
 import packageJson from "./package.json" with { type: "json" }
 
 const nextConfig: NextConfig = {

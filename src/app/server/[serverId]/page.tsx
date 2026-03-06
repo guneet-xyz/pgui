@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Server } from "lucide-react"
+
 import { getServerConfig } from "@/lib/db/config"
 import { getDatabases, getServerVersion } from "@/lib/db/queries"
 import { CreateDatabaseDialog } from "@/components/create-database-dialog"

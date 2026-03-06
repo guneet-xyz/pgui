@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+
 import { getServerConfig } from "@/lib/db/config"
 import { getTables } from "@/lib/db/queries"
 
