@@ -11,7 +11,7 @@ export async function GET(
   },
 ) {
   const { serverId, dbName, schema } = await params
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
 
   if (!config) {
     return NextResponse.json({ error: "Server not found" }, { status: 404 })

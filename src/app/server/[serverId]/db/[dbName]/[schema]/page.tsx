@@ -20,7 +20,7 @@ export default async function SchemaPage({
   const { serverId, dbName, schema } = await params
   const decodedDbName = decodeURIComponent(dbName)
   const decodedSchema = decodeURIComponent(schema)
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
 
   if (!config) {
     notFound()

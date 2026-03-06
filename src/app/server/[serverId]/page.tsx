@@ -19,7 +19,7 @@ export default async function ServerPage({
   params: Promise<{ serverId: string }>
 }) {
   const { serverId } = await params
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
 
   if (!config) {
     notFound()

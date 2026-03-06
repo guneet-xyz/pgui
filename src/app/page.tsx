@@ -5,7 +5,7 @@ import { NoServersConfigured } from "@/components/no-servers"
 import { ServerCard } from "@/components/server-card"
 
 export default async function HomePage() {
-  const configs = getServerConfigs()
+  const configs = await getServerConfigs()
 
   if (configs.length === 0) {
     return (

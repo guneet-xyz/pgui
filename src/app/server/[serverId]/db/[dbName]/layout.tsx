@@ -15,7 +15,7 @@ export default async function DatabaseLayout({
 }) {
   const { serverId, dbName } = await params
   const decodedDbName = decodeURIComponent(dbName)
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
 
   if (!config) {
     notFound()

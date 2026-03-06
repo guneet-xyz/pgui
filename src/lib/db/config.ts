@@ -1,6 +1,9 @@
+import { connection } from "next/server"
 import type { ServerConfig } from "@/types/database"
 
-export function getServerConfigs(): ServerConfig[] {
+export async function getServerConfigs(): Promise<ServerConfig[]> {
+  await connection()
+
   const configs: ServerConfig[] = []
 
   for (let i = 1; ; i++) {
@@ -35,6 +38,9 @@ export function getServerConfigs(): ServerConfig[] {
   return configs
 }
 
-export function getServerConfig(id: string): ServerConfig | undefined {
-  return getServerConfigs().find((c) => c.id === id)
+export async function getServerConfig(
+  id: string,
+): Promise<ServerConfig | undefined> {
+  const configs = await getServerConfigs()
+  return configs.find((c) => c.id === id)
 }

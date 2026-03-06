@@ -39,7 +39,7 @@ export default async function TablePage({
   const decodedDbName = decodeURIComponent(dbName)
   const decodedSchema = decodeURIComponent(schema)
   const decodedTable = decodeURIComponent(table)
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
 
   if (!config) {
     notFound()

@@ -25,7 +25,7 @@ export async function createDatabaseAction(
     }
   }
 
-  const config = getServerConfig(serverId)
+  const config = await getServerConfig(serverId)
   if (!config) {
     return { success: false, error: "Server not found." }
   }
