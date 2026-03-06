@@ -15,7 +15,6 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=build /src/public ./public
 COPY --from=build --chown=nextjs:nodejs /src/.next/standalone ./
 COPY --from=build --chown=nextjs:nodejs /src/.next/static ./.next/static
 
