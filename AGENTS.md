@@ -9,7 +9,8 @@ npm run dev          # Start development server (port 3000)
 npm run build        # Production build (standalone output for Docker)
 npm run start        # Start production server
 npm run lint         # Run ESLint (flat config, Next.js recommended rules)
-npm run format       # Prettier format all source files
+npm run format:write # Prettier format all source files
+npm run format:check # Check formatting without writing
 ```
 
 There is no test framework configured. No test commands exist.
@@ -67,6 +68,7 @@ There is no test framework configured. No test commands exist.
 - **Components**: `export function` (named exports, never default)
 - **Library functions**: `export function` / `export async function` (named)
 - **Types**: `export interface` from `src/types/database.ts`
+- **Metadata**: `export const metadata` (static) or `export async function generateMetadata` (dynamic)
 - Private helpers are not exported (e.g., `quoteIdent`, `formatRowCount`)
 - No barrel exports / index.ts re-export files
 
@@ -138,6 +140,24 @@ const sp = await searchParams
 ```
 
 Always decode URL segments: `const decodedSchema = decodeURIComponent(schema)`
+
+## Page Titles
+
+The root layout defines a title template: `"%s · pgui"`. Each page provides its own title segment via `metadata` or `generateMetadata()`, and the template appends `· pgui` automatically.
+
+Titles use two-level context (current item + parent):
+
+| Route                | Title Example              |
+| -------------------- | -------------------------- |
+| `/`                  | `servers · pgui`           |
+| `/server/[serverId]` | `Production · pgui`        |
+| `…/db/[dbName]`      | `mydb · Production · pgui` |
+| `…/[schema]`         | `public · mydb · pgui`     |
+| `…/[schema]/[table]` | `users · public · pgui`    |
+
+- The home page uses `title.absolute` since the template does not apply to pages in the same segment as the layout
+- Dynamic pages use `generateMetadata()` to resolve route params
+- `getServerConfig()` calls in `generateMetadata` are deduplicated by Next.js (same request as the page component)
 
 ## Database Patterns
 
