@@ -55,7 +55,7 @@ export default async function ServerPage({
                 </h1>
               </div>
               <p className="text-muted-foreground mt-1 font-mono text-sm">
-                {config.host}:{config.port}
+                {config.hostExternal}:{config.portExternal}
               </p>
             </div>
             <Card>
@@ -98,7 +98,7 @@ export default async function ServerPage({
               </h1>
             </div>
             <p className="text-muted-foreground mt-1 font-mono text-sm">
-              {config.host}:{config.port}
+              {config.hostExternal}:{config.portExternal}
             </p>
           </div>
 
@@ -138,7 +138,7 @@ export default async function ServerPage({
                   <CardContent>
                     <div className="flex items-center gap-2">
                       <span className="text-sm">
-                        {config.user}@{config.host}
+                        {config.user}@{config.hostExternal}
                       </span>
                       {config.ssl && (
                         <Badge

@@ -39,11 +39,21 @@ export async function getServerConfigs(): Promise<ServerConfig[]> {
     const autodiscover =
       autodiscoverRaw === "true" || (!autodiscoverRaw && !databases)
 
+    const port = parseInt(process.env[`${prefix}PORT`] || "5432", 10)
+    const portExternalRaw = process.env[`${prefix}PORT_EXTERNAL`]
+    const portExternalParsed = portExternalRaw
+      ? parseInt(portExternalRaw, 10)
+      : NaN
+
     configs.push({
       id: String(i),
       displayName: displayName || `Server ${i}`,
       host,
-      port: parseInt(process.env[`${prefix}PORT`] || "5432", 10),
+      port,
+      hostExternal: process.env[`${prefix}HOST_EXTERNAL`] || host,
+      portExternal: Number.isNaN(portExternalParsed)
+        ? port
+        : portExternalParsed,
       user,
       password: password || "",
       ssl: process.env[`${prefix}SSL`] === "true",

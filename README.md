@@ -46,16 +46,18 @@ services:
 
 Servers are configured via numbered environment variables (`DB_1_*`, `DB_2_*`, etc.):
 
-| Variable              | Required | Default      | Description                                        |
-| --------------------- | -------- | ------------ | -------------------------------------------------- |
-| `DB_{N}_DISPLAY_NAME` | No       | `Server {N}` | Display name in the UI                             |
-| `DB_{N}_HOST`         | Yes      |              | PostgreSQL host                                    |
-| `DB_{N}_PORT`         | No       | `5432`       | PostgreSQL port                                    |
-| `DB_{N}_USERNAME`     | Yes      |              | PostgreSQL user                                    |
-| `DB_{N}_PASSWORD`     | No       | `""`         | PostgreSQL password                                |
-| `DB_{N}_SSL`          | No       | `false`      | Set `true` to enable SSL                           |
-| `DB_{N}_AUTODISCOVER` | No       | `true`       | Discover all databases on the server automatically |
-| `DB_{N}_DATABASES`    | No       |              | Comma-separated list of databases to show          |
+| Variable               | Required | Default      | Description                                        |
+| ---------------------- | -------- | ------------ | -------------------------------------------------- |
+| `DB_{N}_DISPLAY_NAME`  | No       | `Server {N}` | Display name in the UI                             |
+| `DB_{N}_HOST`          | Yes      |              | PostgreSQL host                                    |
+| `DB_{N}_PORT`          | No       | `5432`       | PostgreSQL port                                    |
+| `DB_{N}_HOST_EXTERNAL` | No       | `HOST`       | Host shown in the UI (defaults to `HOST`)          |
+| `DB_{N}_PORT_EXTERNAL` | No       | `PORT`       | Port shown in the UI (defaults to `PORT`)          |
+| `DB_{N}_USERNAME`      | Yes      |              | PostgreSQL user                                    |
+| `DB_{N}_PASSWORD`      | No       | `""`         | PostgreSQL password                                |
+| `DB_{N}_SSL`           | No       | `false`      | Set `true` to enable SSL                           |
+| `DB_{N}_AUTODISCOVER`  | No       | `true`       | Discover all databases on the server automatically |
+| `DB_{N}_DATABASES`     | No       |              | Comma-separated list of databases to show          |
 
 ### Database Discovery
 

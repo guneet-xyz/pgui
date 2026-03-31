@@ -48,7 +48,8 @@ export default async function DatabaseLayout({
                 href={`/server/${serverId}`}
                 className="text-muted-foreground hover:text-foreground truncate font-mono text-xs transition-colors"
               >
-                {config.displayName} &middot; {config.host}:{config.port}
+                {config.displayName} &middot; {config.hostExternal}:
+                {config.portExternal}
               </Link>
             </div>
           </div>

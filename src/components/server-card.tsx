@@ -35,7 +35,7 @@ export function ServerCard({ config, status }: ServerCardProps) {
               </Badge>
             </div>
             <CardDescription className="font-mono text-xs">
-              {config.host}:{config.port}
+              {config.hostExternal}:{config.portExternal}
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto">
@@ -71,7 +71,7 @@ export function ServerCard({ config, status }: ServerCardProps) {
             )}
           </div>
           <CardDescription className="font-mono text-xs">
-            {config.host}:{config.port}
+            {config.hostExternal}:{config.portExternal}
           </CardDescription>
         </CardHeader>
         <CardContent className="mt-auto">

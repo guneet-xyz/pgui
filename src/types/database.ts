@@ -3,6 +3,8 @@ export interface ServerConfig {
   displayName: string
   host: string
   port: number
+  hostExternal: string
+  portExternal: number
   user: string
   password: string
   ssl: boolean

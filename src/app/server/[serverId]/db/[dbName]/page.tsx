@@ -54,8 +54,8 @@ export default async function DatabasePage({
           <p className="text-muted-foreground text-sm">Database overview</p>
         </div>
         <CopyConnectionUrl
-          host={config.host}
-          port={config.port}
+          host={config.hostExternal}
+          port={config.portExternal}
           user={config.user}
           password={config.password}
           ssl={config.ssl}

@@ -216,6 +216,8 @@ The app scans sequentially and stops at the first gap.
 DB_1_DISPLAY_NAME=production    # Display name (defaults to "Server N")
 DB_1_HOST=localhost             # Required
 DB_1_PORT=5432                  # Optional, defaults to 5432
+DB_1_HOST_EXTERNAL=db.example.com  # Optional, defaults to HOST (shown in UI instead of HOST)
+DB_1_PORT_EXTERNAL=15432        # Optional, defaults to PORT (shown in UI instead of PORT)
 DB_1_USERNAME=readonly          # Required
 DB_1_PASSWORD=secret            # Optional, defaults to ""
 DB_1_SSL=false                  # Optional, defaults to false
